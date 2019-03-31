@@ -1,4 +1,4 @@
-# BraceletAlgorithm
+# Bracelet Algorithm by Alan Maldonado
 Bracelet Algorithm for finding a cycle between N number of pairs.
 
 
