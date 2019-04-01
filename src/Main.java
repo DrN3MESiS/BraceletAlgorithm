@@ -48,14 +48,32 @@ class Pulsar{
 	
 	public Pulsar() {
 		System.out.println("Entries:");
+		double inf = Double.POSITIVE_INFINITY;
+		double minStart = inf;
+		double minEnd = inf;
 		this.n = Integer.parseInt(input.nextLine());
 		for (int i = 0; i < n; i++) {
 			String[] split = input.nextLine().split(" ");
 			int first = Integer.parseInt(split[0]);
-			int second = Integer.parseInt(split[1]);;					
+			if(first < minStart) {
+				minStart = (double)first;
+			}
+			int second = Integer.parseInt(split[1]);					
 			theList.add(new Node(first, second));
 		}
-		waitList.add(this.theList.get(0));
+		Node minimum = null;
+		for (Node node : theList) {
+			if (node.start != minStart) {
+				continue;
+			} else {
+				if(node.end < minEnd) {
+					minEnd = node.end;
+					minimum = node;
+				}
+			}
+		}
+		
+		waitList.add(minimum);		
 		
 		for (int i = 0; i < this.n; i++) {
 			Node toCheck = waitList.poll();
@@ -77,10 +95,6 @@ class Pulsar{
 	}
 	
 	public Node determinePair(Node head) {
-		Node result = null;
-		int count = 0;
-		ArrayList<Node> temp = new ArrayList<Node>();
-		
 		for (Node curNode : theList) {
 			if(curNode.accessed == true) {
 				continue;
@@ -118,6 +132,7 @@ class Pulsar{
 				}
 			}
 		}
+		
 		return null;
 	}
 	
